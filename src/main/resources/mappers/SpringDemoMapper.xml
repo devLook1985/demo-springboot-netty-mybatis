@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.service.SpringDemoMapper">
+	<select id="findAll" resultType="map">
+		select 
+			  test_Sn as testsn
+			, test_Str_1 as teststr1
+			, test_Str_2 as teststr2
+		from tb_test
+	</select>
+	
+	<insert id="addEntity">
+		INSERT INTO TB_TEST (test_sn, test_str_1, test_str_2)
+			 VALUES (
+			 	(SELECT COALESCE(MAX(test_sn)+1, 1) FROM TB_TEST)
+			 	, #{paramStr1}
+			 	, #{paramStr2}
+			 	);
+	</insert>
+</mapper>
